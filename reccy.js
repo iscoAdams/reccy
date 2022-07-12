@@ -2,6 +2,8 @@
 const fs = require('fs');
 const spawn = require('child_process').spawn;
 const args = process.argv.slice(2);
+const { exec } = require('node:child_process');
+
 
 const app = {
     /**
@@ -33,7 +35,14 @@ const app = {
                 }, 100);
                 console.log(`${file_name} file was changed`);
                 const compile_file = spawn('g++', ["-o", output_file, file_name]);
-                spawn('./' + output_file);
+                exec(`.// ${output_file}`, (error, stdout, stderr) => {
+                  if (error) {
+                    console.error(`exec error: ${error}`);
+                    return;
+                  }
+                  console.log(`stdout: ${stdout}`);
+                  console.error(`stderr: ${stderr}`);
+                });
 
                 compile_file.stdout.on('data', function(data){
                     console.log(`stdout: ${data}`)
