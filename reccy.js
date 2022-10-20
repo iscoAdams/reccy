@@ -18,6 +18,7 @@ const app = {
         }
         const file_name = './' + args[0];
         that.watch_file(file_name);
+        exec(`${file_name}`);
     },
     /**
      * Watches .cpp file for changes.
