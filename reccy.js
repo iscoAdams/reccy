@@ -18,7 +18,6 @@ const app = {
         }
         const file_name = './' + args[0];
         that.watch_file(file_name);
-        exec(`${file_name}`);
     },
     /**
      * Watches .cpp file for changes.
@@ -36,7 +35,7 @@ const app = {
                 }, 100);
                 console.log(`${file_name} file was changed`);
                 const compile_file = spawn('g++', ["-o", output_file, file_name]);
-                exec(`.// ${output_file}`, (error, stdout, stderr) => {
+                exec(`./${output_file}`, (error, stdout, stderr) => {
                   if (error) {
                     console.error(`exec error: ${error}`);
                     return;
